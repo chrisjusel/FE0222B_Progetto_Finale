@@ -1,0 +1,36 @@
+.active{
+  color: red !important;
+  text-decoration: underline;
+}
+
+mat-sidenav-container {
+  height: 100vh;
+
+  mat-sidenav {
+    background-color: #026aa7;
+    mat-nav-list {
+      .menu-item {
+        margin-left: 8px;
+        color: white;
+      }
+
+      .chevron-button {
+        transition: 300ms ease-in-out;
+        transform: rotate(0deg);
+      }
+
+      .chevron-button.rotated {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+mat-icon{
+  color: white;
+}
+
+.access{
+  position: absolute;
+  bottom: 15px;
+}
