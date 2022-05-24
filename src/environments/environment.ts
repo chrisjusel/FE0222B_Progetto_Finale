@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   pathApi: 'http://epicode.online/epicodebeservice_v2',
-  adminToken: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY1MzMxMjIxNiwiZXhwIjoxNjUzMzk4NjE2fQ.tD1x5nurDkYSZma5r6VRYzUbEh6lB5heLcTWzvJ5hT2u5jsMn8n9ug8ERCuTSzSOqb3XGbTy5ZDO1u_11qb_3Q',
+  adminToken: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY1MzM4OTg3MCwiZXhwIjoxNjUzNDc2MjcwfQ.0t2Ue3zkiMrNHJla9d4Ek94D2znKh7eyWnAZDGxF6oQIlvQJGsH-TjJQWnu2iZ4YCYeUgAtdaV7GhsVyoO51xQ',
   adminTenant: 'fe_0222b'
 };
 

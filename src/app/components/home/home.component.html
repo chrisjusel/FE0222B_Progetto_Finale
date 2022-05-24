@@ -1,1 +1,12 @@
-<p>home works!</p>
+<div class="viewport">
+  <mat-card class="welcome-card">
+    <img src="../../../assets/img/cloud.png">
+      <h1>Benvenuto</h1>
+    <mat-card-content>
+      <p class="label">Accedi per utilizzare i nostri servizi</p>
+      <button mat-raised-button color="primary" [routerLink]="['/login']" routerLinkActive="active" >Accedi</button>
+      <p class="label">Altrimenti, se non sei ancora iscritto, iscriviti</p>
+      <button mat-raised-button color="primary">Iscriviti</button>
+    </mat-card-content>
+  </mat-card>
+</div>
