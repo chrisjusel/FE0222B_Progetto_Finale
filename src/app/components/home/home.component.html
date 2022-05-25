@@ -1,12 +1,16 @@
 <div class="viewport">
-  <mat-card class="welcome-card">
+  <mat-card *ngIf="!checkIfUserIsLoggedIn(); else redirect" class="welcome-card">
     <img src="../../../assets/img/cloud.png">
       <h1>Benvenuto</h1>
     <mat-card-content>
       <p class="label">Accedi per utilizzare i nostri servizi</p>
       <button mat-raised-button color="primary" [routerLink]="['/login']" routerLinkActive="active" >Accedi</button>
       <p class="label">Altrimenti, se non sei ancora iscritto, iscriviti</p>
-      <button mat-raised-button color="primary">Iscriviti</button>
+      <button mat-raised-button color="primary" [routerLink]="['/signup']" routerLinkActive="active" >Iscriviti</button>
     </mat-card-content>
   </mat-card>
 </div>
+
+<ng-template #redirect>
+  {{redirectIfLogged()}}
+</ng-template>

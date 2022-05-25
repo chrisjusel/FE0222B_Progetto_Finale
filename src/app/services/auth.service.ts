@@ -6,6 +6,7 @@ import { map, tap, catchError } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { throwError } from 'rxjs';
 import { Utente } from '../models/utente';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -15,17 +16,61 @@ export class AuthService {
   pathApi: string;
   private authSubject = new BehaviorSubject<null|Utente>(null);
   user$ = this.authSubject.asObservable();
-  isLoggedIn$ = this.user$.pipe(map(user => !!user));
 
   jwtHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient) {
+  autologoutTimer: any;
+
+  constructor(private http: HttpClient, private router: Router) {
     this.pathApi = environment.pathApi
+    this.restoreUser()
   }
 
   login(data: {username: string; password: string}){
     console.log(data);
-    return this.http.post<Utente>(`${this.pathApi}/api/auth/login`, data);
+    return this.http.post<Utente>(`${this.pathApi}/api/auth/login`, data).pipe(
+      tap((data) => {
+        this.authSubject.next(data);
+        const expirationDate = this.jwtHelper.getTokenExpirationDate(data.accessToken) as Date
+        this.autoLogout(expirationDate)
+      })
+    );
+  }
+
+  signup(data: {username: string; email: string; password: string; role: any[]}){
+    return this.http.post(`${this.pathApi}/api/auth/signup`, data)
+  }
+
+  logout(){
+    this.authSubject.next(null);
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
+    if(this.autologoutTimer){
+      clearTimeout(this.autologoutTimer);
+    }
+  }
+
+  autoLogout(expirationDate: Date){
+    const expirationMilliseconds = expirationDate.getTime() - new Date().getTime();
+    this.autologoutTimer = setTimeout(() => {
+      this.logout();
+    }, expirationMilliseconds);
+  }
+
+  restoreUser(){
+    const loggedUserData = localStorage.getItem('user');
+    if(!loggedUserData) return;
+    const user: Utente = JSON.parse(loggedUserData);
+    if(this.jwtHelper.isTokenExpired(user.accessToken)){
+      return
+    }
+    this.authSubject.next(user)
+    const expirationDate = this.jwtHelper.getTokenExpirationDate(user.accessToken) as Date
+    this.autoLogout(expirationDate);
+  }
+
+  isLogged(){
+    return this.authSubject.value ? true : false;
   }
 
   private errors(err: any) {

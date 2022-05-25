@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
     this.authSrv.login(dati).subscribe((res) => {
       console.log(res);
       localStorage.setItem('user', JSON.stringify(res));
+      this.router.navigate(['/dashboard']);
     })
   }
-
 
 }

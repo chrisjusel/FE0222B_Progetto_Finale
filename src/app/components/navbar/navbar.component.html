@@ -7,35 +7,45 @@
         </mat-icon>
       </mat-list-item>
 
-      <mat-list-item [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <mat-icon mat-list-icon>home</mat-icon>
+      <mat-list-item *ngIf="isLogged()" [routerLink]="['/dashboard']" routerLinkActive="active">
+        <mat-icon mat-list-icon>dashboard</mat-icon>
         <span *ngIf="isExpanded" class="menu-item">Dashboard</span>
       </mat-list-item>
 
-      <mat-list-item [routerLink]="'user'">
+      <mat-list-item *ngIf="!isLogged()" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon mat-list-icon>home</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Home</span>
+      </mat-list-item>
+
+      <mat-list-item *ngIf="isLogged()" [routerLink]="['/users']" routerLinkActive="active">
         <mat-icon mat-list-icon>supervisor_account</mat-icon>
         <span *ngIf="isExpanded" class="menu-item">Utenti</span>
       </mat-list-item>
 
-      <mat-list-item [routerLink]="'info'">
+      <mat-list-item *ngIf="isLogged()" [routerLink]="'info'">
         <mat-icon mat-list-icon>badge</mat-icon>
         <span *ngIf="isExpanded" class="menu-item">Clienti</span>
       </mat-list-item>
 
-      <mat-list-item [routerLink]="'info'">
+      <mat-list-item *ngIf="isLogged()" [routerLink]="'info'">
         <mat-icon mat-list-icon>local_atm</mat-icon>
         <span *ngIf="isExpanded" class="menu-item">Fatture</span>
       </mat-list-item>
 
       <div class="access">
-        <mat-list-item [routerLink]="['/login']" routerLinkActive="active">
+        <mat-list-item [routerLink]="['/signup']" routerLinkActive="active">
+          <mat-icon mat-list-icon>app_registration</mat-icon>
+          <span *ngIf="isExpanded" class="menu-item">Signup</span>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="!isLogged()" [routerLink]="['/login']" routerLinkActive="active">
           <mat-icon mat-list-icon>login</mat-icon>
           <span *ngIf="isExpanded" class="menu-item">Login</span>
         </mat-list-item>
 
-        <mat-list-item [routerLink]="'info'">
+        <mat-list-item *ngIf="isLogged()" (click)="logout()">
           <mat-icon mat-list-icon>logout</mat-icon>
-          <span *ngIf="isExpanded" class="menu-item">Logout</span>
+          <span *ngIf="isExpanded" class="menu-item" (click)="logout()">Logout</span>
         </mat-list-item>
       </div>
 
