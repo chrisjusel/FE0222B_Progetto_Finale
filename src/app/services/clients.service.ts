@@ -1,20 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Utente } from '../models/utente';
+import { Cliente } from '../models/cliente';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class ClientsService {
 
-  users!: Utente[];
   pathApi: string;
   constructor(private http: HttpClient) {
     this.pathApi = environment.pathApi;
   }
 
-  getAllUsers(pageIndex: number, itemNumber: number){
-    return this.http.get<any>(`${this.pathApi}/api/users?page=${pageIndex}&size=${itemNumber}`);
+  getAllClients(){
+    return this.http.get<any>(`${this.pathApi}/api/clienti`);
   }
 }
