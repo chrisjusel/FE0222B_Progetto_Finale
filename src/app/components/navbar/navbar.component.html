@@ -22,7 +22,7 @@
         <span *ngIf="isExpanded" class="menu-item">Utenti</span>
       </mat-list-item>
 
-      <mat-list-item *ngIf="isLogged()" [routerLink]="'info'">
+      <mat-list-item *ngIf="isLogged()" [routerLink]="['/clients']">
         <mat-icon mat-list-icon>badge</mat-icon>
         <span *ngIf="isExpanded" class="menu-item">Clienti</span>
       </mat-list-item>

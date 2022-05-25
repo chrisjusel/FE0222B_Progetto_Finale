@@ -25,6 +25,7 @@ import { HomeComponent } from './components/home/home.component';
 import { UsersComponent } from './users/users.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import { ClientsComponent } from './components/clients/clients.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import {MatTableModule} from '@angular/material/table';
     DashboardComponent,
     SignupComponent,
     HomeComponent,
-    UsersComponent
+    UsersComponent,
+    ClientsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

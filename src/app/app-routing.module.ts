@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UsersComponent } from './users/users.component';
+import { ClientsComponent } from './components/clients/clients.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,11 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'clients',
+    component: ClientsComponent,
     canActivate: [AuthGuard]
   }
 ];
