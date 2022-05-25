@@ -24,16 +24,15 @@ export class UsersComponent implements OnInit {
   dataSource: any = null;
 
   constructor(private usersSrv: UsersService) {
-    this.getAllUsersByPage();
+    this.getAllUsers();
   }
 
   ngOnInit(): void {
 
   }
 
-  getAllUsersByPage(){
+  getAllUsers(){
     this.usersSrv.getAllUsers().subscribe((res) => {
-      //console.log(res.content[0].roles[0].roleName);
       this.dataSource = new MatTableDataSource<UsersData>(res.content)
       console.log(res);
       console.log(this.dataSource);

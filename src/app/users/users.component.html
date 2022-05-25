@@ -1,12 +1,18 @@
 <div class="mat-elevation-z8">
 
-  <mat-paginator [length]="100"
-                [pageSize]="10"
-                [pageSizeOptions]="[5, 10, 25, 100]"
-                aria-label="Select page">
-  </mat-paginator>
+<div class="paginator-header">
+  <div class="d-flex pageTitle">
+    <mat-icon class="dashico">group</mat-icon>
+    <h1>Utenti</h1>
+  </div>
+    <mat-paginator [length]="100"
+                  [pageSize]="10"
+                  [pageSizeOptions]="[10, 20, 50]"
+                  aria-label="Select page">
+    </mat-paginator>
+</div>
 
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource" *ngIf="dataSource != null; else loading">
 
     <!-- id Column -->
     <ng-container matColumnDef="id">
@@ -40,3 +46,9 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
+
+<ng-template #loading class="loading">
+  <div class="container d-flex justify-content-center">
+    <div class="spinner-border" role="status"></div>
+  </div>
+</ng-template>

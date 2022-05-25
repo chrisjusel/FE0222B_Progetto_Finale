@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignupComponent } from './components/signup/signup.component';
 import {MatSelectModule} from '@angular/material/select';
 import { HomeComponent } from './components/home/home.component';
