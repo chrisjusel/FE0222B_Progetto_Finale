@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   }
 
   isLogged(){
-    return this.authSrv.isLogged()
+    return this.authSrv.isLogged;
   }
 
 }

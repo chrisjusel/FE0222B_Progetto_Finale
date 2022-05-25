@@ -17,6 +17,8 @@ export class AuthService {
   private authSubject = new BehaviorSubject<null|Utente>(null);
   user$ = this.authSubject.asObservable();
 
+  isLogged: boolean = false;
+
   jwtHelper = new JwtHelperService();
 
   autologoutTimer: any;
@@ -30,6 +32,7 @@ export class AuthService {
     console.log(data);
     return this.http.post<Utente>(`${this.pathApi}/api/auth/login`, data).pipe(
       tap((data) => {
+        this.isLogged = true;
         this.authSubject.next(data);
         const expirationDate = this.jwtHelper.getTokenExpirationDate(data.accessToken) as Date
         this.autoLogout(expirationDate)
@@ -42,6 +45,7 @@ export class AuthService {
   }
 
   logout(){
+    this.isLogged = false;
     this.authSubject.next(null);
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
@@ -61,6 +65,7 @@ export class AuthService {
     const loggedUserData = localStorage.getItem('user');
     if(!loggedUserData) return;
     const user: Utente = JSON.parse(loggedUserData);
+    this.isLogged = true;
     if(this.jwtHelper.isTokenExpired(user.accessToken)){
       return
     }
@@ -69,9 +74,9 @@ export class AuthService {
     this.autoLogout(expirationDate);
   }
 
-  isLogged(){
+/*   isLogged(){
     return this.authSubject.value ? true : false;
-  }
+  } */
 
   private errors(err: any) {
     switch (err.error) {

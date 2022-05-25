@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
   }
 
   checkIfUserIsLoggedIn(){
-    return this.authSrv.isLogged();
+    console.log(this.authSrv.isLogged);
+    return this.authSrv.isLogged;
   }
 
   redirectIfLogged(){
