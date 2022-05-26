@@ -8,6 +8,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { UsersComponent } from './users/users.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { BillingsComponent } from './components/clients/billings/billings.component';
+import { ClientDetailComponent } from './components/clients/client-detail/client-detail.component';
+import { ModifyClientComponent } from './components/clients/modify-client/modify-client.component';
 
 const routes: Routes = [
   {
@@ -43,11 +45,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: ':id'
+        path: ':id',
+        component: ModifyClientComponent
       },
       {
         path: 'billings/:id',
-        component: BillingsComponent
+        component: BillingsComponent,
+        pathMatch: 'full'
       }
     ]
   }

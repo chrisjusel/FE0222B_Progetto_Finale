@@ -1,6 +1,7 @@
 <div class="viewport d-flex">
 
   <div class="clients row container">
+    <button class="btn btn-success">+</button>
     <mat-paginator
     *ngIf="response"
     [length]="totalElements"
@@ -23,7 +24,8 @@
           <p><span>Ragione Sociale:</span> {{client.ragioneSociale}}</p>
           <p><span>Email:</span>{{client.email}}</p>
         </mat-card-content>
-        <button class="btn btn-primary" routerLink="billings/{{client.id}}" routerLinkActive="active">dettaglio</button>
+        <button class="btn btn-primary">Cancella Cliente</button>
+        <button class="btn btn-primary" routerLink="{{client.id}}">Modifica Cliente</button>
       </mat-card>
     </div>
   </div>

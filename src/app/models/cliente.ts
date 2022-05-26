@@ -16,6 +16,7 @@ export interface Cliente {
     id: number;
     via: string;
     civico: string;
+    cap: string;
     localita: string;
     comune: string;
   };
