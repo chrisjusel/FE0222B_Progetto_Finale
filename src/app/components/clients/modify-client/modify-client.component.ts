@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientsService } from 'src/app/services/clients.service';
+import { ComuniService } from 'src/app/services/comuni.service';
+import { ProvinceService } from 'src/app/services/province.service';
 
 @Component({
   selector: 'app-modify-client',
@@ -11,10 +13,15 @@ export class ModifyClientComponent implements OnInit {
 
   form!: FormGroup;
   clientType!: string[];
+  comuni!: any[];
+  provincia!: any[];
+  response!: any;
+  nomeProvincia!: string;
 
-  constructor(private fb: FormBuilder, private clientsSrv: ClientsService) { }
+  constructor(private fb: FormBuilder, private clientsSrv: ClientsService, private comuniSrv: ComuniService, private provinceSrv: ProvinceService) { }
 
   ngOnInit(): void {
+    this.getAllComuni();
     this.getClientTypes();
     this.inizializzaForm();
   }
@@ -30,14 +37,14 @@ export class ModifyClientComponent implements OnInit {
       nomeContatto: new FormControl(''),
       cognomeContatto: new FormControl(''),
       telefonoContatto: new FormControl(''),
-      emailContatto: new FormControl(''),
+      emailContatto: new FormControl('', [Validators.required]),
       indirizzoSedeOperativa: this.fb.group({
         via: new FormControl(''),
         civico: new FormControl(''),
         cap: new FormControl(''),
         localita: new FormControl(''),
         comune: this.fb.group({
-          id: new FormControl(''),
+          id: new FormControl('', [Validators.required]),
           nome: '',
           provincia: {}
         })
@@ -51,6 +58,42 @@ export class ModifyClientComponent implements OnInit {
     })
   }
 
-  onSubmit(form: any){}
+  getAllComuni(){
+    this.comuniSrv.getAllComuni().subscribe((res) => {
+      this.comuni = res.content;
+      console.log(this.comuni);
+    })
+  }
+  onSubmit(form: any){
 
+    let send = this.form.value;
+    send.indirizzoSedeOperativa.comune.provincia = this.provincia;
+    send.indirizzoSedeOperativa.comune.nome = this.getNomeComuneById(send.indirizzoSedeOperativa.comune.id);
+    console.log(send);
+    //gli passo solo l'id del comune
+  }
+
+  getProvinciaByComuneId(comuneId: number){
+    for(let i=0; i<this.comuni.length; i++){
+      if(this.comuni[i].id == comuneId){
+        return this.comuni[i].provincia.id;
+      }
+    }
+  }
+
+  getNomeComuneById(comuneId: number){
+    for(let i=0; i<this.comuni.length; i++){
+      if(this.comuni[i].id == comuneId){
+        return this.comuni[i].nome;
+      }
+    }
+  }
+
+  onChange(){
+    let provinciaId = this.getProvinciaByComuneId(this.form.value.indirizzoSedeOperativa.comune.id);
+    this.provinceSrv.getProvinciaById(provinciaId).subscribe((res) => {
+      this.nomeProvincia = res.nome;
+      this.provincia = res;
+    });
+  }
 }

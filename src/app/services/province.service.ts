@@ -5,14 +5,14 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ComuniService {
+export class ProvinceService {
 
   pathApi: string;
   constructor(private http: HttpClient) {
     this.pathApi = environment.pathApi;
   }
 
-  getAllComuni(){
-    return this.http.get<any>(`${this.pathApi}/api/comuni`);
+  getProvinciaById(idProvincia: number){
+    return this.http.get<any>(`${this.pathApi}/api/province/${idProvincia}`);
   }
 }
