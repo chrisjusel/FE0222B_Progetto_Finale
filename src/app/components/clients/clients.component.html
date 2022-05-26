@@ -1,13 +1,33 @@
-<div class="viewport">
-  <div class="billings row">
-    <div class="col-lg-3 mb-3">
+<div class="viewport d-flex">
+
+  <div class="clients row container">
+    <mat-paginator
+    *ngIf="response"
+    [length]="totalElements"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    (page)="pageEvents($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+    <div *ngFor="let client of clients; let i = index">
       <mat-card>
+        <mat-card-header>
+          <div class="d-flex justify-content-between">
+            ID:{{client.id}} -
+            Cognome: {{client.cognomeContatto}}
+          </div>
+        </mat-card-header>
         <mat-card-content class="card-content">
-          <h1></h1>
+          <p><span>Ragione Sociale:</span> {{client.ragioneSociale}}</p>
+          <p><span>Email:</span>{{client.email}}</p>
         </mat-card-content>
+        <button class="btn btn-primary" routerLink="billings/{{client.id}}" routerLinkActive="active">dettaglio</button>
       </mat-card>
     </div>
   </div>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-
+  <div class="px-4">
+    <router-outlet></router-outlet>
+  </div>
 </div>

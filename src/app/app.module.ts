@@ -26,6 +26,9 @@ import { UsersComponent } from './users/users.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { ClientsComponent } from './components/clients/clients.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { BillingsComponent } from './components/clients/billings/billings.component';
+import { ClientDetailComponent } from './components/clients/client-detail/client-detail.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { ClientsComponent } from './components/clients/clients.component';
     HomeComponent,
     UsersComponent,
     ClientsComponent,
-    DashboardComponent
+    DashboardComponent,
+    BillingsComponent,
+    ClientDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +61,8 @@ import { ClientsComponent } from './components/clients/clients.component';
     HttpClientModule,
     MatSelectModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatGridListModule
   ],
   providers: [
     {

@@ -7,6 +7,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UsersComponent } from './users/users.component';
 import { ClientsComponent } from './components/clients/clients.component';
+import { BillingsComponent } from './components/clients/billings/billings.component';
 
 const routes: Routes = [
   {
@@ -39,7 +40,16 @@ const routes: Routes = [
   {
     path: 'clients',
     component: ClientsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: ':id'
+      },
+      {
+        path: 'billings/:id',
+        component: BillingsComponent
+      }
+    ]
   }
 ];
 
