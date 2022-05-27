@@ -27,6 +27,7 @@ export class ModifyClientComponent implements OnInit {
   clientToModify!: Cliente;
   clientId!: number;
   sub!: Subscription;
+  activateDialog = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,9 +36,7 @@ export class ModifyClientComponent implements OnInit {
     private provinceSrv: ProvinceService,
     private activeRoute: ActivatedRoute,
     private router: Router
-  ) {
-    //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.activeRoute.paramMap.subscribe(queryParams => {
@@ -45,7 +44,6 @@ export class ModifyClientComponent implements OnInit {
       this.getClientTypes();
       this.inizializzaForm();
       this.getClientIdFromURL();
-      console.log("nuova");
       this.fillModifyForm();
     });
   }
@@ -55,14 +53,14 @@ export class ModifyClientComponent implements OnInit {
     this.form = this.fb.group({
       ragioneSociale: new FormControl('', [Validators.required]),
       partitaIva: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       tipoCliente: new FormControl('', [Validators.required]),
-      pec: new FormControl(''),
+      pec: new FormControl('', Validators.email),
       telefono: new FormControl(''),
       nomeContatto: new FormControl(''),
       cognomeContatto: new FormControl(''),
       telefonoContatto: new FormControl(''),
-      emailContatto: new FormControl('', [Validators.required]),
+      emailContatto: new FormControl('', [Validators.required, Validators.email]),
       indirizzoSedeOperativa: this.fb.group({
         via: new FormControl(''),
         civico: new FormControl(''),
@@ -71,7 +69,7 @@ export class ModifyClientComponent implements OnInit {
         comune: this.fb.group({
           id: new FormControl('', [Validators.required]),
           nome: '',
-          provincia: {},
+          provincia: null,
         }),
       }),
     });
@@ -97,9 +95,16 @@ export class ModifyClientComponent implements OnInit {
       send.indirizzoSedeOperativa.comune.id
     );
     if(this.clientId == 0){
-      this.clientsSrv.createClient(send).subscribe((res) => console.log(res));
+      this.clientsSrv.createClient(send).subscribe((res) => {
+        console.log(res);
+        this.openDialog();
+      });
+
     } else {
-      this.clientsSrv.modifyClient(this.clientId, send).subscribe((res) => console.log(res));
+      this.clientsSrv.modifyClient(this.clientId, send).subscribe((res) => {
+        console.log(res);
+        this.openDialog();
+      });
     }
   }
 
@@ -128,7 +133,9 @@ export class ModifyClientComponent implements OnInit {
     this.provinceSrv.getProvinciaById(provinciaId).subscribe((res) => {
       this.nomeProvincia = res.nome;
       this.provincia = res;
+      console.log(this.provincia)
     });
+
   }
 
   fillModifyForm(){
@@ -167,6 +174,15 @@ export class ModifyClientComponent implements OnInit {
         },
       });
     });
+  }
+
+  openDialog(){
+    this.activateDialog = true;
+  }
+
+  closeDialog(){
+    this.activateDialog = false;
+    this.router.navigate(['/clients']);
   }
 
   ngOnDestroy(){

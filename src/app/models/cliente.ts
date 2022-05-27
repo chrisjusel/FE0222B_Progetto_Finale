@@ -18,7 +18,7 @@ export interface Cliente {
     civico: string;
     cap: string;
     localita: string;
-    comune: string;
+    comune: Comune;
   };
   indirizzoSedeLegale: {
     id: number;
