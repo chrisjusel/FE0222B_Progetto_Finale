@@ -11,6 +11,7 @@ import { BillingsComponent } from './components/clients/billings/billings.compon
 import { ClientDetailComponent } from './components/clients/client-detail/client-detail.component';
 import { ModifyClientComponent } from './components/clients/modify-client/modify-client.component';
 import { GlobalBillingsComponent } from './components/global-billings/global-billings.component';
+import { ModifyBillingComponent } from './components/modify-billing/modify-billing.component';
 
 const routes: Routes = [
   {
@@ -57,7 +58,7 @@ const routes: Routes = [
     children: [
       {
         path: ':id',
-        component: BillingsComponent
+        component: ModifyBillingComponent
       }
     ]
   },

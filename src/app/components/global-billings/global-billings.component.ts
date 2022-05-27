@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from 'src/app/models/cliente';
 import { Fattura } from 'src/app/models/fattura';
 import { BillingsService } from 'src/app/services/billings.service';
@@ -22,10 +23,11 @@ export class GlobalBillingsComponent implements OnInit {
   pageIndex: number = 0;
   pageSize: number = 5;
   totalElements!: number;
+  clickedBilling!: Fattura;
 
   activateDialog = false;
 
-  constructor(private billingsSrv: BillingsService) { }
+  constructor(private billingsSrv: BillingsService, private activeRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllClients(this.pageIndex, this.pageSize);
@@ -62,5 +64,4 @@ export class GlobalBillingsComponent implements OnInit {
   closeDialog(){
     this.activateDialog = false;
   }
-
 }

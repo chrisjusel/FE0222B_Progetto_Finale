@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { ActivatedRoute, ActivationEnd, NavigationEnd, Params, Router, RouterEvent } from '@angular/router';
 import { Cliente } from 'src/app/models/cliente';
 import { ClientsService } from 'src/app/services/clients.service';
 
@@ -22,10 +23,17 @@ export class ClientsComponent implements OnInit {
 
   activateDialog = false;
 
-  constructor(private clientsSrv: ClientsService) { }
+  constructor(private clientsSrv: ClientsService, private activeRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllClients(this.pageIndex, this.pageSize);
+
+    this.activeRoute.url.subscribe((res) => {
+      console.log(res)
+      if(res[0].path == 'clients'){
+        this.getAllClients(this.pageIndex, this.pageSize)
+      }
+    });
   }
 
   getAllClients(pageIndex: number, pageSize: number){
@@ -59,5 +67,4 @@ export class ClientsComponent implements OnInit {
   closeDialog(){
     this.activateDialog = false;
   }
-
 }

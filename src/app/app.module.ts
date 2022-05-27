@@ -31,6 +31,7 @@ import { BillingsComponent } from './components/clients/billings/billings.compon
 import { ClientDetailComponent } from './components/clients/client-detail/client-detail.component';
 import { ModifyClientComponent } from './components/clients/modify-client/modify-client.component';
 import { GlobalBillingsComponent } from './components/global-billings/global-billings.component';
+import { ModifyBillingComponent } from './components/modify-billing/modify-billing.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { GlobalBillingsComponent } from './components/global-billings/global-bil
     BillingsComponent,
     ClientDetailComponent,
     ModifyClientComponent,
-    GlobalBillingsComponent
+    GlobalBillingsComponent,
+    ModifyBillingComponent
   ],
   imports: [
     BrowserModule,

@@ -1,55 +1,72 @@
 <div class="viewport d-flex">
-
   <div class="clients row container">
     <div class="d-flex pageTitle">
       <mat-icon class="dashico">local_atm</mat-icon>
-      <h1>Fatture</h1>
+      <h1>Tutte le fatture</h1>
     </div>
-   <div class="head d-flex">
-      <button mat-fab color="primary" routerLink="0" aria-label="Aggiungi utente">
+    <div class="head d-flex">
+      <button
+        mat-fab
+        color="primary"
+        routerLink="0"
+        aria-label="Aggiungi utente"
+      >
         <mat-icon>add</mat-icon>
       </button>
       <mat-paginator
-      *ngIf="response"
-      [length]="totalElements"
-      [pageSize]="pageSize"
-      [pageIndex]="pageIndex"
-      [pageSizeOptions]="[10, 25, 50, 100]"
-      (page)="pageEvents($event)"
-      aria-label="Select page"
-    >
-    </mat-paginator>
-   </div>
+        *ngIf="response"
+        [length]="totalElements"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [pageSizeOptions]="[10, 25, 50, 100]"
+        (page)="pageEvents($event)"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </div>
     <div *ngIf="billings; else loading">
       <div *ngFor="let billing of billings; let i = index">
         <mat-card>
           <mat-card-header>
             <div class="d-flex justify-content-between">
-              <p class="cognome"><span>Fattura # </span>{{billing.numero}} intestata a {{billing.cliente.ragioneSociale}}</p>
-              <p class="id">ID: {{billing.id}}</p>
+              <p class="cognome">
+                <span>Fattura # </span>{{ billing.numero }} intestata a
+                {{ billing.cliente.ragioneSociale }}
+              </p>
+              <p class="id">ID: {{ billing.id }}</p>
             </div>
           </mat-card-header>
           <mat-card-content class="card-content d-flex justify-content-between">
             <div class="d-flex">
               <div>
-                <p><span>Ragione sociale cliente: </span>{{billing.cliente.ragioneSociale}}</p>
-                <p><span>Importo: </span>{{billing.importo}}</p>
-                <p><span>Anno: </span>{{billing.anno}}</p>
-                <p><span>Data: </span>{{billing.data}}</p>
-                <p><span>Stato: </span>{{billing.stato.nome}}</p>
+                <p>
+                  <span>Ragione sociale cliente: </span
+                  >{{ billing.cliente.ragioneSociale }}
+                </p>
+                <p><span>Importo: </span>{{ billing.importo }}</p>
+                <p><span>Anno: </span>{{ billing.anno }}</p>
+                <p><span>Data: </span>{{ billing.data }}</p>
+                <p><span>Stato: </span>{{ billing.stato.nome }}</p>
               </div>
-<!--                 <div class="indirizzo">
-                  <span>Indirizzo sede operativa</span>
-                  <p><span>Via: </span>{{client.indirizzoSedeOperativa.via}}, </p>
-                  <p><span>Civico: </span>{{client.indirizzoSedeOperativa.civico}}</p>
-                  <p><span>Località: </span>{{client.indirizzoSedeOperativa.localita}}</p>
-                  <p><span>Comune: </span>{{client.indirizzoSedeOperativa.comune.nome}}</p>
-                  <p><span>Provincia: </span>{{client.indirizzoSedeOperativa.comune.provincia.nome}}</p>
-                </div> -->
             </div>
+
             <div>
-              <button mat-flat-button class="d-block button-card" color="primary">Modifica</button>
-              <button mat-flat-button class="d-block button-card" color="warn" (click)="deleteBilling(billing.id)">Elimina</button>
+              <button
+                mat-flat-button
+                class="d-block button-card"
+                color="primary"
+                routerLink="{{ billing.id }}"
+              >
+                Modifica
+              </button>
+              <button
+                mat-flat-button
+                class="d-block button-card"
+                color="warn"
+                (click)="deleteBilling(billing.id)"
+              >
+                Elimina
+              </button>
             </div>
           </mat-card-content>
         </mat-card>
@@ -64,8 +81,15 @@
 <div class="msgSystem" *ngIf="activateDialog">
   <div class="cont">
     <h1>Messaggio di sistema</h1>
-    <p>Cliente cancellato correttamente</p>
-    <button mat-flat-button color="warn" class="closeBtn" (click)="closeDialog()">Chiudi</button>
+    <p>Fattura cancellata correttamente</p>
+    <button
+      mat-flat-button
+      color="warn"
+      class="closeBtn"
+      (click)="closeDialog()"
+    >
+      Chiudi
+    </button>
   </div>
 </div>
 

@@ -11,6 +11,7 @@ import { Cliente } from 'src/app/models/cliente';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ComuniService } from 'src/app/services/comuni.service';
 import { ProvinceService } from 'src/app/services/province.service';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-modify-client',
@@ -28,6 +29,8 @@ export class ModifyClientComponent implements OnInit {
   clientId!: number;
   sub!: Subscription;
   activateDialog = false;
+
+
 
   constructor(
     private fb: FormBuilder,
