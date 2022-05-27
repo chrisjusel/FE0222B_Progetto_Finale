@@ -6,6 +6,7 @@ export interface Fattura {
   data: Date;
   id: number;
   importo: number;
+  numero: number;
   stato: {
     id: number;
     nome: string;

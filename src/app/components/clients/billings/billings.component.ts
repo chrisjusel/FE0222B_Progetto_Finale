@@ -35,7 +35,7 @@ export class BillingsComponent implements OnInit {
   }
 
   getAllBillings(clientId: number, pageIndex: number, pageSize: number){
-    return this.billingSrv.getAllBillings(clientId, pageIndex, pageSize).subscribe((res) => {
+    return this.billingSrv.getAllBillingsByClientId(clientId, pageIndex, pageSize).subscribe((res) => {
       this.response = res;
       this.billings = res.content;
       this.totalElements = this.response.totalElements;

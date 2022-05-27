@@ -30,6 +30,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { BillingsComponent } from './components/clients/billings/billings.component';
 import { ClientDetailComponent } from './components/clients/client-detail/client-detail.component';
 import { ModifyClientComponent } from './components/clients/modify-client/modify-client.component';
+import { GlobalBillingsComponent } from './components/global-billings/global-billings.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ModifyClientComponent } from './components/clients/modify-client/modify
     DashboardComponent,
     BillingsComponent,
     ClientDetailComponent,
-    ModifyClientComponent
+    ModifyClientComponent,
+    GlobalBillingsComponent
   ],
   imports: [
     BrowserModule,

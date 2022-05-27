@@ -27,7 +27,7 @@
         <span *ngIf="isExpanded" class="menu-item">Clienti</span>
       </mat-list-item>
 
-      <mat-list-item *ngIf="isLogged()" [routerLink]="'info'">
+      <mat-list-item *ngIf="isLogged()" [routerLink]="['/billings']">
         <mat-icon mat-list-icon>local_atm</mat-icon>
         <span *ngIf="isExpanded" class="menu-item">Fatture</span>
       </mat-list-item>

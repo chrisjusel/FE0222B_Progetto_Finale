@@ -10,6 +10,7 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { BillingsComponent } from './components/clients/billings/billings.component';
 import { ClientDetailComponent } from './components/clients/client-detail/client-detail.component';
 import { ModifyClientComponent } from './components/clients/modify-client/modify-client.component';
+import { GlobalBillingsComponent } from './components/global-billings/global-billings.component';
 
 const routes: Routes = [
   {
@@ -52,13 +53,14 @@ const routes: Routes = [
   },
   {
     path: 'billings',
+    component: GlobalBillingsComponent,
     children: [
       {
         path: ':id',
         component: BillingsComponent
       }
     ]
-  }
+  },
 ];
 
 @NgModule({
