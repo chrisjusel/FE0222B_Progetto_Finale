@@ -48,10 +48,14 @@ const routes: Routes = [
         path: ':id',
         component: ModifyClientComponent
       },
+    ]
+  },
+  {
+    path: 'billings',
+    children: [
       {
-        path: 'billings/:id',
-        component: BillingsComponent,
-        pathMatch: 'full'
+        path: ':id',
+        component: BillingsComponent
       }
     ]
   }
