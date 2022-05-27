@@ -20,6 +20,8 @@ export class ClientsComponent implements OnInit {
   pageSize: number = 5;
   totalElements!: number;
 
+  activateDialog = false;
+
   constructor(private clientsSrv: ClientsService) { }
 
   ngOnInit(): void {
@@ -45,6 +47,17 @@ export class ClientsComponent implements OnInit {
     } else {
       this.getAllClients(this.pageIndex, this.pageSize);
     }
+  }
+
+  deleteClient(clientId: number){
+    this.clientsSrv.deleteClient(clientId).subscribe((res) => {
+      this.activateDialog = true;
+      this.getAllClients(this.pageIndex, this.pageSize);
+    })
+  }
+
+  closeDialog(){
+    this.activateDialog = false;
   }
 
 }

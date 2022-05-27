@@ -14,11 +14,15 @@ export class ClientsService {
   }
 
   getAllClients(pageIndex: number, pageSize: number){
-    return this.http.get<any>(`${this.pathApi}/api/clienti?page=${pageIndex}&size=${pageSize}`);
+    return this.http.get<any>(`${this.pathApi}/api/clienti?page=${pageIndex}&size=${pageSize}&sort=id,ASC`);
   }
 
   modifyClient(clientId: number, data: Cliente){
     return this.http.put<any>(`${this.pathApi}/api/clienti/${clientId}`, data);
+  }
+
+  createClient(data: Cliente){
+    return this.http.post<Cliente>(`${this.pathApi}/api/clienti/`, data)
   }
 
   getClientById(clientId: number){
@@ -28,4 +32,9 @@ export class ClientsService {
   getClientTypes(){
     return this.http.get<any>(`${this.pathApi}/api/clienti/tipicliente`);
   }
+
+  deleteClient(clientId: number){
+    return this.http.delete<any>(`${this.pathApi}/api/clienti/${clientId}`);
+  }
+
 }

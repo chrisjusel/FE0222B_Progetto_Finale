@@ -1,35 +1,67 @@
 <div class="viewport d-flex">
 
   <div class="clients row container">
-    <button class="btn btn-success">+</button>
-    <mat-paginator
-    *ngIf="response"
-    [length]="totalElements"
-    [pageSize]="pageSize"
-    [pageIndex]="pageIndex"
-    [pageSizeOptions]="[5, 10, 25, 50]"
-    (page)="pageEvents($event)"
-    aria-label="Select page"
-  >
-  </mat-paginator>
-    <div *ngFor="let client of clients; let i = index">
-      <mat-card>
-        <mat-card-header>
-          <div class="d-flex justify-content-between">
-            ID:{{client.id}} -
-            Cognome: {{client.cognomeContatto}}
-          </div>
-        </mat-card-header>
-        <mat-card-content class="card-content">
-          <p><span>Ragione Sociale:</span> {{client.ragioneSociale}}</p>
-          <p><span>Email:</span>{{client.email}}</p>
-        </mat-card-content>
-        <button class="btn btn-primary">Cancella Cliente</button>
-        <button class="btn btn-primary" routerLink="{{client.id}}">Modifica Cliente</button>
-      </mat-card>
+    <div class="d-flex pageTitle">
+      <mat-icon class="dashico">badge</mat-icon>
+      <h1>Clienti</h1>
+    </div>
+   <div class="head d-flex">
+      <button mat-fab color="primary" routerLink="0" aria-label="Aggiungi utente">
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-paginator
+      *ngIf="response"
+      [length]="totalElements"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[5, 10, 25, 50]"
+      (page)="pageEvents($event)"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+   </div>
+    <div *ngIf="clients; else loading">
+      <div *ngFor="let client of clients; let i = index">
+        <mat-card>
+          <mat-card-header>
+            <div class="d-flex justify-content-between">
+              <p class="cognome">{{client.cognomeContatto}}</p>
+              <p class="id">ID:{{client.id}}</p>
+            </div>
+          </mat-card-header>
+          <mat-card-content class="card-content d-flex justify-content-between">
+            <div>
+              <p><span>Ragione Sociale: </span>{{client.ragioneSociale}}</p>
+              <p><span>Nome: </span>{{client.nomeContatto}}</p>
+              <p><span>Cognome: </span>{{client.cognomeContatto}}</p>
+              <p><span>Email: </span>{{client.email}}</p>
+              <p><span>Partita IVA: </span>{{client.partitaIva}}</p>
+            </div>
+            <div>
+              <button mat-flat-button routerLink="{{client.id}}" class="fatture button-card d-block">Fatture</button>
+              <button mat-flat-button routerLink="{{client.id}}" class="d-block button-card" color="primary">Modifica</button>
+              <button mat-flat-button routerLink="{{client.id}}" class="d-block button-card" color="warn" (click)="deleteClient(client.id)">Elimina</button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </div>
   <div class="px-4">
     <router-outlet></router-outlet>
   </div>
 </div>
+
+<div class="msgSystem" *ngIf="activateDialog">
+  <div class="cont">
+    <h1>Messaggio di sistema</h1>
+    <p>Cliente cancellato correttamente</p>
+    <button mat-flat-button color="warn" class="closeBtn" (click)="closeDialog()">Chiudi</button>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="container d-flex justify-content-center">
+    <div class="spinner-border" role="status"></div>
+  </div>
+</ng-template>

@@ -5,7 +5,7 @@ export interface Cliente {
   id: number;
   partitaIva: string;
   ragioneSociale: string;
-  tipOCliente: string;
+  tipoCliente: string;
   pec: string;
   telefono: string;
   nomeContatto: string;
