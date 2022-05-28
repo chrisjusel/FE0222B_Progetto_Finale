@@ -61,9 +61,19 @@ const routes: Routes = [
         component: ModifyBillingComponent
       },
       {
-        path: 'client-billings/:id',
-        component: BillingsComponent
-      },
+        path: 'client-billings/:idClient',
+        component: BillingsComponent,
+        children: [
+          {
+            path: ':id',
+            component: NewBillingComponent
+          },
+          {
+            path: 'modify-client-billing/:id',
+            component: ModifyBillingComponent
+          }
+        ]
+      }
     ]
   },
 ];

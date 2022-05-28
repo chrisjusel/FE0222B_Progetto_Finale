@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Fattura } from 'src/app/models/fattura';
 import { BillingsService } from 'src/app/services/billings.service';
+import { AppComponent } from 'src/app/app.component';
+import { PreviousRouteService } from 'src/app/services/previous-route.service';
+
 
 @Component({
   selector: 'app-modify-billing',
@@ -12,17 +15,24 @@ import { BillingsService } from 'src/app/services/billings.service';
 })
 export class ModifyBillingComponent implements OnInit {
 
+  previousUrl!: string;
+
   form!: FormGroup;
   states!: any[];
   activateDialog = false;
   billingToModify!: Fattura;
   paramURL!: number;
 
+  previousURL!: string;
+
   sub!: Subscription;
 
   formattedData!: string;
 
-  constructor(private fb: FormBuilder, private billingsSrv: BillingsService, private activeRoute: ActivatedRoute, private router: Router) { }
+  constructor(private fb: FormBuilder, private billingsSrv: BillingsService, private activeRoute: ActivatedRoute, private router: Router, private previousRoute: PreviousRouteService) {
+    this.previousURL = previousRoute.getPreviousURL();
+  }
+
 
   ngOnInit(): void {
     this.inizializzaForm();
@@ -52,7 +62,7 @@ export class ModifyBillingComponent implements OnInit {
     let send = this.packaging();
     this.billingsSrv.modifyBilling(this.paramURL, send).subscribe((res) => {
       console.log(res);
-      this.router.navigate(['/billings']);
+      this.router.navigate([this.previousURL]);
     });
   }
 
@@ -81,6 +91,6 @@ export class ModifyBillingComponent implements OnInit {
   }
 
   closeDialog(){
-    this.activateDialog = false;
+    this.router.navigate([this.previousURL]);
   }
 }

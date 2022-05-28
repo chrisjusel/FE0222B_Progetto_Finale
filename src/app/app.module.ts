@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +32,9 @@ import { ModifyClientComponent } from './components/clients/modify-client/modify
 import { GlobalBillingsComponent } from './components/global-billings/global-billings.component';
 import { ModifyBillingComponent } from './components/modify-billing/modify-billing.component';
 import { NewBillingComponent } from './components/clients/billings/new-billing/new-billing.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { PreviousRouteService } from './services/previous-route.service';
 
 @NgModule({
   declarations: [
@@ -68,15 +71,25 @@ import { NewBillingComponent } from './components/clients/billings/new-billing/n
     MatSelectModule,
     MatPaginatorModule,
     MatTableModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
+    },
+    {
+      provide : APP_INITIALIZER, useFactory : initFunction, deps: [PreviousRouteService] , multi : true
     }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function initFunction(config : PreviousRouteService)
+{
+  return ()=> config.previousRoute();
+}

@@ -29,8 +29,10 @@ export class BillingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.sub = this.router.params.subscribe((params) => {
-      this.clientId = +params['id'];
-      this.getAllBillings(this.clientId, this.pageIndex, this.pageSize);
+      this.clientId = +params['idClient'];
+      if(this.clientId != 0){
+        this.getAllBillings(this.clientId, this.pageIndex, this.pageSize);
+      }
     })
   }
 
