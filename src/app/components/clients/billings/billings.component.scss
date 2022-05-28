@@ -1,0 +1,50 @@
+.viewport{
+  width: 100%;
+  height: 100vh;
+}
+
+.clients{
+  height: 100vh;
+  overflow: scroll;
+  overflow-x: hidden;
+  position: relative;
+  padding: 40px;
+}
+
+//HEADER
+
+mat-paginator{
+  width: 70%;
+  right: 0
+}
+
+.head{
+  justify-content: space-between;
+  padding: 20px;
+  background-color: white;
+  margin-bottom: 20px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.pageTitle h1{
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.pageTitle{
+  border-bottom: 4px solid #026aa7;
+}
+
+.dashico{
+  font-size: 2.5em;
+  position: relative;
+  top: -3px;
+  margin-right: 0.4em;
+}
+
+//HEADER
+
+.clientBillingsContainer{
+  width: 300px;
+}

@@ -27,13 +27,13 @@
         <span *ngIf="isExpanded" class="menu-item">Clienti</span>
       </mat-list-item>
 
-      <mat-list-item *ngIf="isLogged()" [routerLink]="['/billings']">
+      <mat-list-item *ngIf="isLogged()" [routerLink]="['/billings']" routerLinkActive="active">
         <mat-icon mat-list-icon>local_atm</mat-icon>
         <span *ngIf="isExpanded" class="menu-item">Fatture</span>
       </mat-list-item>
 
       <div class="access">
-        <mat-list-item [routerLink]="['/signup']" routerLinkActive="active">
+        <mat-list-item [routerLink]="['/signup']" routerLinkActive="active" routerLinkActive="active">
           <mat-icon mat-list-icon>app_registration</mat-icon>
           <span *ngIf="isExpanded" class="menu-item">Signup</span>
         </mat-list-item>

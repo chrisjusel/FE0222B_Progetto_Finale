@@ -22,7 +22,7 @@ export class BillingsComponent implements OnInit {
   response: any;
 
   pageIndex: number = 0;
-  pageSize: number = 5;
+  pageSize: number = 10;
   totalElements!: number;
 
   constructor(private router: ActivatedRoute, private billingSrv: BillingsService) { }

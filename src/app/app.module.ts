@@ -28,7 +28,6 @@ import {MatTableModule} from '@angular/material/table';
 import { ClientsComponent } from './components/clients/clients.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { BillingsComponent } from './components/clients/billings/billings.component';
-import { ClientDetailComponent } from './components/clients/client-detail/client-detail.component';
 import { ModifyClientComponent } from './components/clients/modify-client/modify-client.component';
 import { GlobalBillingsComponent } from './components/global-billings/global-billings.component';
 import { ModifyBillingComponent } from './components/modify-billing/modify-billing.component';
@@ -45,7 +44,6 @@ import { ModifyBillingComponent } from './components/modify-billing/modify-billi
     ClientsComponent,
     DashboardComponent,
     BillingsComponent,
-    ClientDetailComponent,
     ModifyClientComponent,
     GlobalBillingsComponent,
     ModifyBillingComponent

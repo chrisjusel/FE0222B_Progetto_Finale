@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Cliente } from 'src/app/models/cliente';
 import { Fattura } from 'src/app/models/fattura';
 import { BillingsService } from 'src/app/services/billings.service';
@@ -27,13 +28,20 @@ export class GlobalBillingsComponent implements OnInit {
 
   activateDialog = false;
 
+  sub!: Subscription;
+
   constructor(private billingsSrv: BillingsService, private activeRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.getAllClients(this.pageIndex, this.pageSize);
+    this.sub = this.activeRoute.url.subscribe((res) => {
+      console.log(res)
+      if(res[0].path == 'billings'){
+        this.getAllBillings(this.pageIndex, this.pageSize)
+      }
+    });
   }
 
-  getAllClients(pageIndex: number, pageSize: number){
+  getAllBillings(pageIndex: number, pageSize: number){
     return this.billingsSrv.getAllBillings(pageIndex, pageSize).subscribe((res) => {
       this.response = res;
       this.billings = res.content;
@@ -48,16 +56,16 @@ export class GlobalBillingsComponent implements OnInit {
     console.log(this.pageIndex);
     console.log(this.pageSize);
     if (event.pageIndex > this.pageIndex) {
-      this.getAllClients(this.pageIndex, this.pageSize);
+      this.getAllBillings(this.pageIndex, this.pageSize);
     } else {
-      this.getAllClients(this.pageIndex, this.pageSize);
+      this.getAllBillings(this.pageIndex, this.pageSize);
     }
   }
 
   deleteBilling(billingId: number){
     this.billingsSrv.deleteBilling(billingId).subscribe((res) => {
       this.activateDialog = true;
-      this.getAllClients(this.pageIndex, this.pageSize);
+      this.getAllBillings(this.pageIndex, this.pageSize);
     })
   }
 

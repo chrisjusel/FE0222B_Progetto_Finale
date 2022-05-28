@@ -8,7 +8,6 @@ import { AuthGuard } from './guards/auth.guard';
 import { UsersComponent } from './users/users.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { BillingsComponent } from './components/clients/billings/billings.component';
-import { ClientDetailComponent } from './components/clients/client-detail/client-detail.component';
 import { ModifyClientComponent } from './components/clients/modify-client/modify-client.component';
 import { GlobalBillingsComponent } from './components/global-billings/global-billings.component';
 import { ModifyBillingComponent } from './components/modify-billing/modify-billing.component';
@@ -59,6 +58,10 @@ const routes: Routes = [
       {
         path: ':id',
         component: ModifyBillingComponent
+      },
+      {
+        path: 'client-billings/:id',
+        component: BillingsComponent
       }
     ]
   },

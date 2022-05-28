@@ -1,14 +1,28 @@
-<div class="clients row container">
-  <mat-paginator
-  *ngIf="response"
-  [length]="totalElements"
-  [pageSize]="pageSize"
-  [pageIndex]="pageIndex"
-  [pageSizeOptions]="[5, 10, 25, 50]"
-  (page)="pageEvents($event)"
-  aria-label="Select page"
->
-</mat-paginator>
+<div class="clients row">
+  <div class="d-flex pageTitle">
+    <mat-icon class="dashico">local_atm</mat-icon>
+    <h1>Tutte le fatture</h1>
+  </div>
+  <div class="head d-flex">
+    <button
+      mat-fab
+      color="primary"
+      routerLink="0"
+      aria-label="Aggiungi utente"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <mat-paginator
+      *ngIf="response"
+      [length]="totalElements"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[10, 20, 30]"
+      (page)="pageEvents($event)"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
   <div *ngFor="let billing of billings; let i = index">
     <mat-card>
       <mat-card-header>

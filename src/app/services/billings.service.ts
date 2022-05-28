@@ -18,7 +18,7 @@ export class BillingsService {
   }
 
   getAllBillings(pageIndex: number, pageSize: number){
-    return this.http.get<any>(`${this.pathApi}/api/fatture?page=${pageIndex}&size=${pageSize}`);
+    return this.http.get<any>(`${this.pathApi}/api/fatture?page=${pageIndex}&size=${pageSize}&sort=id,ASC`);
   }
 
   deleteBilling(billingId: number){
@@ -33,8 +33,9 @@ export class BillingsService {
     return this.http.post<any>(`${this.pathApi}/api/statifattura`);
   } */
 
-  modifyBilling(billingId: number, data:Fattura){
-    return this.http.put<any>(`${this.pathApi}/api/fatture`, data);
+  modifyBilling(billingId: number, data:any){
+    console.log(data);
+    return this.http.put<any>(`${this.pathApi}/api/fatture/${billingId}`, data);
   }
 
   getBillingById(billingId: number){

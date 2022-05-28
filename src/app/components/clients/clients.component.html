@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div>
-              <button mat-flat-button routerLink="{{client.id}}" class="fatture button-card d-block">Fatture</button>
+              <button mat-flat-button routerLink="/billings/client-billings/{{client.id}}" class="fatture button-card d-block">Fatture</button>
               <button mat-flat-button routerLink="{{client.id}}" class="d-block button-card" color="primary">Modifica</button>
               <button mat-flat-button class="d-block button-card" color="warn" (click)="deleteClient(client.id)">Elimina</button>
             </div>
