@@ -11,7 +11,7 @@
 }
 
 .modify{
-  width: 600px;
+  width: 400px;
   background-color: white;
   border-radius: 10px;
   padding: 30px
@@ -29,4 +29,15 @@ span{
 button{
   margin-right: 20px;
   border-radius: 10px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

@@ -34,6 +34,12 @@ export class BillingsComponent implements OnInit {
         this.getAllBillings(this.clientId, this.pageIndex, this.pageSize);
       }
     })
+
+    this.sub = this.router.url.subscribe((res) => {
+      if(res[0].path == 'clients'){
+        this.getAllBillings(this.clientId, this.pageIndex, this.pageSize)
+      }
+    });
   }
 
   getAllBillings(clientId: number, pageIndex: number, pageSize: number){
@@ -41,20 +47,23 @@ export class BillingsComponent implements OnInit {
       this.response = res;
       this.billings = res.content;
       this.totalElements = this.response.totalElements;
-      console.log(this.billings);
     })
   }
 
   pageEvents(event: any) {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-    console.log(this.pageIndex);
-    console.log(this.pageSize);
     if (event.pageIndex > this.pageIndex) {
       this.getAllBillings(this.clientId, this.pageIndex, this.pageSize);
     } else {
       this.getAllBillings(this.clientId, this.pageIndex, this.pageSize);
     }
+  }
+
+  deleteBilling(billingId: number){
+    this.billingSrv.deleteBilling(billingId).subscribe(() => {
+      this.getAllBillings(this.clientId, this.pageIndex, this.pageSize);
+    });
   }
 
   onDestroy(){

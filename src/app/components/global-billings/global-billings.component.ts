@@ -34,7 +34,6 @@ export class GlobalBillingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.sub = this.activeRoute.url.subscribe((res) => {
-      console.log(res)
       if(res[0].path == 'billings'){
         this.getAllBillings(this.pageIndex, this.pageSize)
       }
@@ -46,7 +45,6 @@ export class GlobalBillingsComponent implements OnInit {
       this.response = res;
       this.billings = res.content;
       this.totalElements = this.response.totalElements;
-      console.log(this.response);
     })
   }
 

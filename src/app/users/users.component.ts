@@ -45,8 +45,6 @@ export class UsersComponent implements OnInit {
   pageEvents(event: any) {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-    console.log(this.pageIndex);
-    console.log(this.pageSize);
     if (event.pageIndex > this.pageIndex) {
       this.getAllUsers(this.pageIndex, this.pageSize);
     } else {

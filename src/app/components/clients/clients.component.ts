@@ -30,7 +30,6 @@ export class ClientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.sub = this.activeRoute.url.subscribe((res) => {
-      console.log(res)
       if(res[0].path == 'clients'){
         this.getAllClients(this.pageIndex, this.pageSize)
       }
@@ -42,7 +41,6 @@ export class ClientsComponent implements OnInit {
       this.response = res;
       this.clients = res.content;
       this.totalElements = this.response.totalElements;
-      console.log(this.response);
     })
   }
 
