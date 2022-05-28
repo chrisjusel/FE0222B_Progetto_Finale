@@ -1,13 +1,12 @@
-<div class="clients row">
+<div *ngIf="billings;" class="clients row">
   <div class="d-flex pageTitle">
-    <mat-icon class="dashico">local_atm</mat-icon>
-    <h1>Tutte le fatture</h1>
+    <h1>Fatture per {{billings[0].cliente.ragioneSociale}}</h1>
   </div>
   <div class="head d-flex">
     <button
       mat-fab
       color="primary"
-      routerLink="0"
+      routerLink="/billings/client-billings/0/{{billings[0].cliente.id}}"
       aria-label="Aggiungi utente"
     >
       <mat-icon>add</mat-icon>
@@ -39,3 +38,5 @@
   </div>
   <button class="btn btn-danger" routerLink="/clients/">Chiudi</button>
 </div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,32 @@
+.viewport{
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.212);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modify{
+  width: 600px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px
+}
+
+.modify h2{
+  font-weight: bold;
+  border-bottom: 3px solid #026aa7;
+}
+
+span{
+  font-weight: bold;
+}
+
+button{
+  margin-right: 20px;
+  border-radius: 10px;
+}
