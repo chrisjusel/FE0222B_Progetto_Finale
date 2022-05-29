@@ -37,4 +37,11 @@ export class ClientsService {
     return this.http.delete<any>(`${this.pathApi}/api/clienti/${clientId}`);
   }
 
+  getByRagioneSocialeContains(substring: string, pageIndex: number, pageSize: number, sort: string){
+    return this.http.get<any>(`${this.pathApi}/api/clienti/ragionesociale?nome=${substring}&sort=ragioneSociale,${sort}&page=${pageIndex}&size=${pageSize}`);
+  }
+
+  getByDataInserimentoBetween(dataFrom: string, dataTo: string, pageIndex: number, pageSize: number){
+    return this.http.get<any>(`${this.pathApi}/api/clienti/datainserimento?from=${dataFrom}&to=${dataTo}&page=${pageIndex}&size=${pageSize}`);
+  }
 }

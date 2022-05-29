@@ -5,20 +5,82 @@
       <mat-icon class="dashico">badge</mat-icon>
       <h1>Clienti</h1>
     </div>
-   <div class="head d-flex">
-      <button mat-fab color="primary" routerLink="0" aria-label="Aggiungi utente">
-        <mat-icon>add</mat-icon>
-      </button>
-      <mat-paginator
-      *ngIf="response"
-      [length]="totalElements"
-      [pageSize]="pageSize"
-      [pageIndex]="pageIndex"
-      [pageSizeOptions]="[5, 10, 25, 50]"
-      (page)="pageEvents($event)"
-      aria-label="Select page"
-    >
-    </mat-paginator>
+   <div class="head">
+      <div class="d-flex justify-content-between">
+        <button mat-fab color="primary" routerLink="0" aria-label="Aggiungi utente">
+          <mat-icon>add</mat-icon>
+        </button>
+        <mat-paginator
+        *ngIf="response"
+        [length]="totalElements"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        (page)="pageEvents($event)"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+      </div>
+    <div class="filters d-flex">
+      <span>Filtra per:
+        <p class="filterbtn" (click)="activateFilterRagioneSociale()">Ragione Sociale</p>
+        <p class="filterbtn" (click)="activatefilterDataBetween()">Data Inserimento</p>
+      </span>
+      <div>
+        <form class="d-flex" [formGroup]="form" (submit)="filterOnSubmit(form.value)">
+
+          <div *ngIf="filterRagioneSociale" class="form-group d-flex align-items-center">
+              <input class="form-control" type="text" formControlName="ragsoc" id="ragsoc" name="ragsoc" placeholder="Ragione Sociale">
+              <button class="filterBtn btn" type="submit">
+                <mat-icon class="mx-2 btnsearch" >search</mat-icon>
+              </button>
+          </div>
+
+          <div *ngIf="filterDataBetween" class="d-flex wrap mx-2 pickers">
+            <div class="col1">
+              <div class="form-group picker1">
+                <mat-form-field appearance="legacy">
+                  <mat-label>Da:</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="picker1"
+                    formControlName="dataFrom"
+                    id="dataFrom"
+                    name="dataFrom"
+                  />
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+
+
+            <div class="col1">
+              <div class="form-group picker2">
+                <mat-form-field appearance="legacy">
+                  <mat-label>A:</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="picker2"
+                    formControlName="dataTo"
+                    id="dataTo"
+                    name="dataTo"
+                  />
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <button class="filterBtn btn" type="submit">
+              <mat-icon class="mx-2 btnsearch" >search</mat-icon>
+            </button>
+
+          </div>
+        </form>
+      </div>
+    </div>
    </div>
     <div *ngIf="clients; else loading">
       <div *ngFor="let client of clients; let i = index">
@@ -37,6 +99,7 @@
                 <p><span>Cognome: </span>{{client.cognomeContatto}}</p>
                 <p><span>Email: </span>{{client.email}}</p>
                 <p><span>Partita IVA: </span>{{client.partitaIva}}</p>
+                <p><span>Data Inserimento: </span></p>
               </div>
                 <div class="indirizzo">
                   <span>Indirizzo sede operativa</span>

@@ -10,10 +10,11 @@
   overflow-x: hidden;
   position: relative;
   padding: 40px;
+
 }
 
 mat-paginator{
-  width: 70%;
+  width: 50%;
   right: 0
 }
 
@@ -123,3 +124,40 @@ span{
 .indirizzo{
   margin-left: 20px;
 }
+
+.filterbtn{
+  padding: 3px;
+  font-size: 0.9em;
+  border-radius: 20px;
+  display: inline;
+  font-weight: 200;
+  border: 1px solid #999;
+  cursor: pointer;
+  margin-right: 2px;
+}
+
+.filters{
+  margin-top: 20px;
+  border-top: 1px solid #026aa7;
+  padding: 20px 20px 0px 20px;
+  align-items: center;
+}
+
+.form-control{
+  border-radius: 10px;
+  line-height: 1;
+  margin-left: 10px;
+  width: 70%;
+}
+
+.filterBtn{
+  border-radius: 4em;
+  padding: 0;
+  background-color: transparent;
+  color: black;
+}
+
+.picker1, .picker2{
+  width: 70%;
+}
+
