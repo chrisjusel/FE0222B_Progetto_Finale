@@ -55,6 +55,7 @@ const routes: Routes = [
   {
     path: 'billings',
     component: GlobalBillingsComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: ':id',
