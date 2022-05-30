@@ -29,18 +29,17 @@ export class AuthService {
   }
 
   login(data: {username: string; password: string}){
-    console.log(data);
     return this.http.post<Utente>(`${this.pathApi}/api/auth/login`, data).pipe(
       tap((data) => {
         this.isLogged = true;
         this.authSubject.next(data);
         const expirationDate = this.jwtHelper.getTokenExpirationDate(data.accessToken) as Date
         this.autoLogout(expirationDate)
-      })
+      }), catchError(this.errors)
     );
   }
 
-  signup(data: {username: string; email: string; password: string; role: any[]}){
+  signup(data: {username: string; email: string; password: string; nome: string; cognome: string, role: any[]}){
     return this.http.post(`${this.pathApi}/api/auth/signup`, data)
   }
 
@@ -73,10 +72,6 @@ export class AuthService {
     const expirationDate = this.jwtHelper.getTokenExpirationDate(user.accessToken) as Date
     this.autoLogout(expirationDate);
   }
-
-/*   isLogged(){
-    return this.authSubject.value ? true : false;
-  } */
 
   private errors(err: any) {
     switch (err.error) {

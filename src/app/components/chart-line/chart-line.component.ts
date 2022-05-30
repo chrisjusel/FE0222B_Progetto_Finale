@@ -39,7 +39,6 @@ export class ChartLineComponent implements OnInit {
   getBillings(){
     this.billingsSrv.getBillings().subscribe((res) => {
       this.fatture = res.content;
-      console.log(this.fatture);
       this.fatture.forEach(el => {
 
         if(el.anno == 2019){

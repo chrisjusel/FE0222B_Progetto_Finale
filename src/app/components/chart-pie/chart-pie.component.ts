@@ -12,6 +12,7 @@ export class ChartPieComponent implements OnInit {
 
   pagate: number = 0;
   nonPagate: number = 0;
+  billings!: Fattura[];
 
 
   pieChartType: ChartType = "pie";
@@ -26,12 +27,10 @@ export class ChartPieComponent implements OnInit {
 
   getBillings(){
     this.billingsSrv.getBillings().subscribe((res) => {
-      console.log(res.content);
-      let billings: Fattura[] = res.content;
-      billings.forEach((el) => {
+      this.billings = res.content;
+      this.billings.forEach((el) => {
         if(el.stato.id == 1){
           this.pagate += 1;
-          console.log("we");
         } else {
           this.nonPagate += 1;
         }

@@ -1,7 +1,13 @@
 <div style="display: block" class="viewport">
-  <canvas baseChart
+  <canvas *ngIf="billings; else loading" baseChart
           [datasets]="pieChartData"
           [labels]="pieChartLabels"
           [type]="pieChartType"></canvas>
-          <p>Fatture pagate e non pagate su un campione di 1500 fatture</p>
+          <p>Fatture pagate e non pagate su un campione di 200 fatture</p>
 </div>
+
+<ng-template #loading>
+  <div class="loading d-flex justify-content-center">
+    <div class="spinner-border" role="status"></div>
+  </div>
+</ng-template>

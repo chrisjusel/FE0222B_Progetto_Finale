@@ -1,6 +1,6 @@
 <div class="viewport">
   <div style="display: block">
-    <canvas baseChart
+    <canvas *ngIf="fatture; else loading" baseChart
             [datasets]="barChartData"
             [labels]="barChartLabels"
             [options]="barChartOptions"
@@ -9,6 +9,13 @@
     </canvas>
   </div>
   <div class="text-center">
-    <p>Introiti annui su un campione di 1500 fatture</p>
+    <p>Introiti annui su un campione di 200 fatture</p>
   </div>
 </div>
+
+<ng-template #loading>
+  <div class="loading d-flex justify-content-center">
+    <div class="spinner-border" role="status"></div>
+  </div>
+</ng-template>
+

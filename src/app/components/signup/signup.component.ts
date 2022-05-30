@@ -19,6 +19,7 @@ interface SignupData{
 })
 export class SignupComponent implements OnInit {
 
+  errorMessage = undefined;
   form!: FormGroup;
   dataPackage!: SignupData;
   constructor(private fb: FormBuilder, private authSrv: AuthService, private router: Router) { }
@@ -33,12 +34,11 @@ export class SignupComponent implements OnInit {
       role: new FormControl('')
     });
     this.form.valueChanges.subscribe(val => {
-      console.log(val);
     })
   }
 
   onSubmit(data: any){
-    let temp: SignupData = {
+    let temp: any = {
       username: data.username,
       email: data.email,
       password: data.password,
@@ -47,7 +47,11 @@ export class SignupComponent implements OnInit {
       role: []
     }
     temp.role.push(data.role);
-    this.authSrv.signup(temp).subscribe((res) => console.log(res));
+    console.log(temp);
+    this.authSrv.signup(temp).subscribe((res) => {
+      console.log(res)
+      this.router.navigate(['/login']);
+    });
   }
 
 }

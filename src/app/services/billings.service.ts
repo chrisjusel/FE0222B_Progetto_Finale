@@ -51,6 +51,6 @@ export class BillingsService {
   }
 
   getBillings(){
-    return this.http.get<any>(`${this.pathApi}/api/fatture?size=1500`);
+    return this.http.get<any>(`${this.pathApi}/api/fatture?size=200`);
   }
 }
