@@ -5,14 +5,14 @@
         <mat-icon class="dashico">dashboard</mat-icon>
         <h1 >Dashbaord</h1>
       </div>
-      <div class="buttons">
-        <mat-card>
+      <div class="buttons d-flex">
+        <mat-card class="button" [routerLink]="['/users']">
           <h1>Utenti</h1>
         </mat-card>
-        <mat-card>
+        <mat-card class="button">
           <h1>Clienti</h1>
         </mat-card>
-        <mat-card>
+        <mat-card class="button">
           <h1>Fatture</h1>
         </mat-card>
       </div>

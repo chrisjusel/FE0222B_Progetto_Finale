@@ -29,3 +29,24 @@
 .wrapper{
   height: 100%;
 }
+
+.buttons{
+  margin-top: 5em;
+}
+.button{
+  width: 300px;
+  height: 150px;
+  margin-right: 20px;
+  border-radius: 10px;
+  transition: transform .2s;
+  cursor: pointer;
+}
+
+.button h1{
+  font-weight: 500;
+  border-bottom: 2px solid #026aa7;
+}
+
+.button:hover{
+  transform: scale(1.1);
+}
