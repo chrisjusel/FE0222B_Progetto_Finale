@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
     this.form.valueChanges.subscribe(val => {
-      console.log(val);
     })
 
   }

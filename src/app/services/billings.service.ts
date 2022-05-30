@@ -49,4 +49,8 @@ export class BillingsService {
   getBillingByImportBetween(importFrom: number, importTo: number, pageIndex: number, pageSize: number){
     return this.http.get<any>(`${this.pathApi}/api/fatture/importo/?from=${importFrom}&to=${importTo}&page=${pageIndex}&size=${pageSize}&sort=importo,ASC`);
   }
+
+  getBillings(){
+    return this.http.get<any>(`${this.pathApi}/api/fatture?size=1500`);
+  }
 }

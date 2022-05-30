@@ -31,7 +31,8 @@
 }
 
 .buttons{
-  margin-top: 5em;
+  margin-top: 6em;
+
 }
 .button{
   width: 300px;
@@ -49,4 +50,30 @@
 
 .button:hover{
   transform: scale(1.1);
+}
+
+.charts{
+  width: 45vw;
+}
+
+.pie{
+  width: 50% !important;
+  margin: 0 auto;
+  margin-top: 2em;
+}
+
+.newuser{
+  width: 100%;
+  padding-top: 3em;
+}
+
+.newuser mat-card{
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.signature{
+  position: fixed;
+  bottom: 10px;
+  color: rgba(121, 121, 121, 0.89);
 }

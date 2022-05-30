@@ -35,6 +35,9 @@ import { NewBillingComponent } from './components/clients/billings/new-billing/n
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PreviousRouteService } from './services/previous-route.service';
+import { ChartLineComponent } from './components/chart-line/chart-line.component';
+import { NgChartsModule } from 'ng2-charts';
+import { ChartPieComponent } from './components/chart-pie/chart-pie.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,9 @@ import { PreviousRouteService } from './services/previous-route.service';
     ModifyClientComponent,
     GlobalBillingsComponent,
     ModifyBillingComponent,
-    NewBillingComponent
+    NewBillingComponent,
+    ChartLineComponent,
+    ChartPieComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +78,8 @@ import { PreviousRouteService } from './services/previous-route.service';
     MatTableModule,
     MatGridListModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgChartsModule
   ],
   providers: [
     {

@@ -9,13 +9,25 @@
         <mat-card class="button" [routerLink]="['/users']">
           <h1>Utenti</h1>
         </mat-card>
-        <mat-card class="button">
+        <mat-card class="button" [routerLink]="['/clients']">
           <h1>Clienti</h1>
         </mat-card>
-        <mat-card class="button">
+        <mat-card class="button" [routerLink]="['/billings']">
           <h1>Fatture</h1>
         </mat-card>
       </div>
+      <div class="newuser">
+        <mat-card class="button" [routerLink]="['/signup']">
+          <h1>Registra utente</h1>
+        </mat-card>
+      </div>
+      <div class="signature">
+          <p>Christian Vitale © 2022</p>
+      </div>
+    </div>
+    <div class="charts">
+      <app-chart-line></app-chart-line>
+      <div class="pie"><app-chart-pie></app-chart-pie></div>
     </div>
   </div>
 </div>
