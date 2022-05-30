@@ -15,7 +15,79 @@
         aria-label="Select page"
       >
       </mat-paginator>
+      <div class="filters d-flex">
+        <span>Filtra per:
+          <p class="filterbtn" (click)="activateFilterTutteFatture()">Tutte le Fatture</p>
+          <p class="filterbtn" (click)="activateFilterStatoFattura()">Stato Fattura</p>
+          <p class="filterbtn" (click)="activateFilterImportoBetween()">Importo</p>
+        </span>
+        <div>
+          <form class="d-flex" [formGroup]="form" (submit)="filterOnSubmit(form.value)">
+
+            <div *ngIf="filterByState" class="form-group d-flex align-items-center">
+              <mat-form-field appearance="legacy" class="d-block">
+                <mat-label>Stato</mat-label>
+
+                <mat-select
+                  matNativeControl
+                  formControlName="stateId"
+                  id="stateId"
+                  name="stateId"
+                >
+                  <mat-option
+                    *ngFor="let state of states"
+                    value="{{ state.id }}"
+                    >{{ state.nome }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <button class="filterBtn btn" type="submit">
+                <mat-icon class="mx-2 btnsearch" >search</mat-icon>
+              </button>
+            </div>
+
+            <button *ngIf="filterTutteFatture" class="filterBtn btn" type="submit">
+              <mat-icon class="mx-2 btnsearch" >search</mat-icon>
+            </button>
+
+            <div *ngIf="filterImportoBetween" class="d-flex importi">
+              <div class="form-group">
+                <mat-form-field appearance="legacy" class="d-block">
+                  <mat-label>Da €:</mat-label>
+                  <input
+                    matInput
+                    matNativeControl
+                    type="number"
+                    formControlName="importFrom"
+                    id="importFrom"
+                    name="importFrom"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field appearance="legacy" class="d-block">
+                  <mat-label>A €:</mat-label>
+                  <input
+                    matInput
+                    matNativeControl
+                    type="number"
+                    formControlName="importTo"
+                    id="importTo"
+                    name="importTo"
+                  />
+                </mat-form-field>
+              </div>
+              <button class="filterBtn btn" type="submit">
+                <mat-icon class="mx-2 btnsearch" >search</mat-icon>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
     </div>
+
     <div *ngIf="billings; else loading">
       <div *ngFor="let billing of billings; let i = index">
         <mat-card>
@@ -35,7 +107,7 @@
                   <span>Ragione sociale cliente: </span
                   >{{ billing.cliente.ragioneSociale }}
                 </p>
-                <p><span>Importo: </span>{{ billing.importo }}</p>
+                <p><span>Importo: </span>{{ billing.importo }} €</p>
                 <p><span>Anno: </span>{{ billing.anno }}</p>
                 <p><span>Stato: </span>{{ billing.stato.nome }}</p>
               </div>

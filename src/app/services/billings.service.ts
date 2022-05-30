@@ -41,4 +41,12 @@ export class BillingsService {
   getBillingById(billingId: number){
     return this.http.get<any>(`${this.pathApi}/api/fatture/${billingId}`);
   }
+
+  getBillingByStato(stateId: number, pageIndex: number, pageSize: number){
+    return this.http.get<any>(`${this.pathApi}/api/fatture/stato/${stateId}?page=${pageIndex}&size=${pageSize}&sort=id,ASC`);
+  }
+
+  getBillingByImportBetween(importFrom: number, importTo: number, pageIndex: number, pageSize: number){
+    return this.http.get<any>(`${this.pathApi}/api/fatture/importo/?from=${importFrom}&to=${importTo}&page=${pageIndex}&size=${pageSize}&sort=importo,ASC`);
+  }
 }

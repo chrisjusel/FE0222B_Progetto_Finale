@@ -30,6 +30,7 @@ export class ClientsComponent implements OnInit {
 
   filterRagioneSociale = false;
   filterDataBetween = false;
+  filterFatturatoAnnuale = false;
 
   filterSelectedDataFrom!: string;
   filterSelectedDataTo!: string;
@@ -52,6 +53,7 @@ export class ClientsComponent implements OnInit {
     } else {
       this.filterRagioneSociale = true;
       this.filterDataBetween = false;
+      this.filterFatturatoAnnuale = false;
     }
   }
 
@@ -60,6 +62,17 @@ export class ClientsComponent implements OnInit {
       this.filterDataBetween = false;
     } else {
       this.filterDataBetween = true;
+      this.filterRagioneSociale = false;
+      this.filterFatturatoAnnuale = false;
+    }
+  }
+
+  activateFilterFatturatoAnnuale(){
+    if(this.filterFatturatoAnnuale){
+      this.filterFatturatoAnnuale = false;
+    } else {
+      this.filterFatturatoAnnuale = true;
+      this.filterDataBetween = false;
       this.filterRagioneSociale = false;
     }
   }
@@ -70,7 +83,17 @@ export class ClientsComponent implements OnInit {
       this.getByRagioneSocialeContains(this.pageIndex, this.pageSize);
     } else if(this.filterDataBetween == true){
       this.getByDataInserimentoBetween(this.pageIndex, this.pageSize);
+    } else if(this.filterFatturatoAnnuale == true){
+      this.getByFatturatoAnnuale(this.form.value.fatturatoFrom, this.form.value.fatturatoTo, this.pageIndex, this.pageSize);
     }
+  }
+
+  getByFatturatoAnnuale(fatturatoFrom: number, fatturatoTo: number, pageIndex: number, pageSize: number){
+    this.clientsSrv.getByFatturatoBetween(this.form.value.fatturatoFrom, this.form.value.fatturatoTo, pageIndex, pageSize).subscribe((res) => {
+      this.response = res;
+      this.clients = res.content;
+      this.totalElements = this.response.totalElements;
+    })
   }
 
   getByRagioneSocialeContains(pageIndex: number, pageSize: number){
@@ -93,7 +116,9 @@ export class ClientsComponent implements OnInit {
     this.form = this.fb.group({
       ragsoc: new FormControl(''),
       dataFrom: new FormControl(''),
-      dataTo: new FormControl('')
+      dataTo: new FormControl(''),
+      fatturatoFrom: new FormControl('', Validators.required),
+      fatturatoTo: new FormControl('', Validators.required)
     })
   }
 
@@ -125,6 +150,9 @@ export class ClientsComponent implements OnInit {
       }
       else if(this.filterDataBetween == true){
         this.getByDataInserimentoBetween(this.pageIndex, this.pageSize);
+      }
+      else if(this.filterFatturatoAnnuale == true){
+        this.getByFatturatoAnnuale(this.form.value.fatturatoFrom, this.form.value.fatturatoTo, this.pageIndex, this.pageSize);
       } else {
         this.getAllClients(this.pageIndex, this.pageSize);
       }
@@ -134,6 +162,9 @@ export class ClientsComponent implements OnInit {
       }
       else if(this.filterDataBetween == true){
         this.getByDataInserimentoBetween(this.pageIndex, this.pageSize);
+      }
+      else if(this.filterFatturatoAnnuale == true){
+        this.getByFatturatoAnnuale(this.form.value.fatturatoFrom, this.form.value.fatturatoTo, this.pageIndex, this.pageSize);
       } else {
         this.getAllClients(this.pageIndex, this.pageSize);
       }

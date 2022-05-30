@@ -1,119 +1,212 @@
 <div class="viewport d-flex">
-
   <div class="clients row container">
     <div class="d-flex pageTitle">
       <mat-icon class="dashico">badge</mat-icon>
       <h1>Clienti</h1>
     </div>
-   <div class="head">
+    <div class="head">
       <div class="d-flex justify-content-between">
-        <button mat-fab color="primary" routerLink="0" aria-label="Aggiungi utente">
+        <button
+          mat-fab
+          color="primary"
+          routerLink="0"
+          aria-label="Aggiungi utente"
+        >
           <mat-icon>add</mat-icon>
         </button>
         <mat-paginator
-        *ngIf="response"
-        [length]="totalElements"
-        [pageSize]="pageSize"
-        [pageIndex]="pageIndex"
-        [pageSizeOptions]="[5, 10, 25, 50]"
-        (page)="pageEvents($event)"
-        aria-label="Select page"
-      >
-      </mat-paginator>
+          *ngIf="response"
+          [length]="totalElements"
+          [pageSize]="pageSize"
+          [pageIndex]="pageIndex"
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          (page)="pageEvents($event)"
+          aria-label="Select page"
+        >
+        </mat-paginator>
       </div>
-    <div class="filters d-flex">
-      <span>Filtra per:
-        <p class="filterbtn" (click)="activateFilterRagioneSociale()">Ragione Sociale</p>
-        <p class="filterbtn" (click)="activatefilterDataBetween()">Data Inserimento</p>
-      </span>
-      <div>
-        <form class="d-flex" [formGroup]="form" (submit)="filterOnSubmit(form.value)">
-
-          <div *ngIf="filterRagioneSociale" class="form-group d-flex align-items-center">
-              <input class="form-control" type="text" formControlName="ragsoc" id="ragsoc" name="ragsoc" placeholder="Ragione Sociale">
+      <div class="filters d-flex">
+        <span
+          >Filtra per:
+          <p class="filterbtn" (click)="activateFilterRagioneSociale()">
+            Ragione Sociale
+          </p>
+          <p class="filterbtn" (click)="activatefilterDataBetween()">
+            Data Inserimento
+          </p>
+          <p class="filterbtn" (click)="activateFilterFatturatoAnnuale()">
+            Fatturato
+          </p>
+        </span>
+        <div>
+          <form
+            class="d-flex"
+            [formGroup]="form"
+            (submit)="filterOnSubmit(form.value)"
+          >
+            <div
+              *ngIf="filterRagioneSociale"
+              class="form-group d-flex align-items-center"
+            >
+              <input
+                class="form-control"
+                type="text"
+                formControlName="ragsoc"
+                id="ragsoc"
+                name="ragsoc"
+                placeholder="Ragione Sociale"
+              />
               <button class="filterBtn btn" type="submit">
-                <mat-icon class="mx-2 btnsearch" >search</mat-icon>
+                <mat-icon class="mx-2 btnsearch">search</mat-icon>
               </button>
-          </div>
+            </div>
 
-          <div *ngIf="filterDataBetween" class="d-flex wrap mx-2 pickers">
-            <div class="col1">
-              <div class="form-group picker1">
-                <mat-form-field appearance="legacy">
-                  <mat-label>Da:</mat-label>
-                  <input
-                    matInput
-                    [matDatepicker]="picker1"
-                    formControlName="dataFrom"
-                    id="dataFrom"
-                    name="dataFrom"
-                  />
-                  <mat-hint>MM/DD/YYYY</mat-hint>
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                  <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
+            <div *ngIf="filterDataBetween" class="d-flex wrap mx-2 pickers">
+              <div class="col1">
+                <div class="form-group picker1">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Da:</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="picker1"
+                      formControlName="dataFrom"
+                      id="dataFrom"
+                      name="dataFrom"
+                    />
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker1"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </div>
               </div>
+
+              <div class="col1">
+                <div class="form-group picker2">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>A:</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="picker2"
+                      formControlName="dataTo"
+                      id="dataTo"
+                      name="dataTo"
+                    />
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker2"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button class="filterBtn btn" type="submit">
+                <mat-icon class="mx-2 btnsearch">search</mat-icon>
+              </button>
             </div>
 
 
-            <div class="col1">
-              <div class="form-group picker2">
-                <mat-form-field appearance="legacy">
-                  <mat-label>A:</mat-label>
-                  <input
-                    matInput
-                    [matDatepicker]="picker2"
-                    formControlName="dataTo"
-                    id="dataTo"
-                    name="dataTo"
-                  />
-                  <mat-hint>MM/DD/YYYY</mat-hint>
-                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                  <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
-              </div>
-            </div>
-            <button class="filterBtn btn" type="submit">
-              <mat-icon class="mx-2 btnsearch" >search</mat-icon>
-            </button>
+            <div *ngIf="filterFatturatoAnnuale" class="form-group d-flex">
+              <mat-form-field appearance="legacy" class="d-block">
+                <mat-label>Da €:</mat-label>
+                <input
+                  matInput
+                  matNativeControl
+                  type="number"
+                  formControlName="fatturatoFrom"
+                  id="fatturatoFrom"
+                  name="fatturatoFrom"
+                />
+              </mat-form-field>
+              <mat-form-field appearance="legacy" class="d-block">
+                <mat-label>A €:</mat-label>
+                <input
+                  matInput
+                  matNativeControl
+                  type="number"
+                  formControlName="fatturatoTo"
+                  id="fatturatoTo"
+                  name="fatturatoTo"
+                />
+              </mat-form-field>
 
-          </div>
-        </form>
+              <button class="filterBtn btn" type="submit">
+                <mat-icon class="mx-2 btnsearch">search</mat-icon>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-   </div>
     <div *ngIf="clients; else loading">
       <div *ngFor="let client of clients; let i = index">
         <mat-card>
           <mat-card-header>
             <div class="d-flex justify-content-between">
-              <p class="cognome">{{client.ragioneSociale}}</p>
-              <p class="id">ID: {{client.id}}</p>
+              <p class="cognome">{{ client.ragioneSociale }}</p>
+              <p class="id">ID: {{ client.id }}</p>
             </div>
           </mat-card-header>
           <mat-card-content class="card-content d-flex justify-content-between">
             <div class="d-flex">
               <div>
-                <p><span>Tipo cliente: </span>{{client.tipoCliente}}</p>
-                <p><span>Nome: </span>{{client.nomeContatto}}</p>
-                <p><span>Cognome: </span>{{client.cognomeContatto}}</p>
-                <p><span>Email: </span>{{client.email}}</p>
-                <p><span>Partita IVA: </span>{{client.partitaIva}}</p>
+                <p><span>Tipo cliente: </span>{{ client.tipoCliente }}</p>
+                <p><span>Nome: </span>{{ client.nomeContatto }}</p>
+                <p><span>Cognome: </span>{{ client.cognomeContatto }}</p>
+                <p><span>Email: </span>{{ client.email }}</p>
+                <p><span>Partita IVA: </span>{{ client.partitaIva }}</p>
                 <p><span>Data Inserimento: </span></p>
               </div>
-                <div class="indirizzo">
-                  <span>Indirizzo sede operativa</span>
-                  <p><span>Via: </span>{{client.indirizzoSedeOperativa.via}}, </p>
-                  <p><span>Civico: </span>{{client.indirizzoSedeOperativa.civico}}</p>
-                  <p><span>Località: </span>{{client.indirizzoSedeOperativa.localita}}</p>
-                  <p><span>Comune: </span>{{client.indirizzoSedeOperativa.comune.nome}}</p>
-                  <p><span>Provincia: </span>{{client.indirizzoSedeOperativa.comune.provincia.nome}}</p>
-                </div>
+              <div class="indirizzo">
+                <span>Indirizzo sede operativa</span>
+                <p>
+                  <span>Via: </span>{{ client.indirizzoSedeOperativa.via }},
+                </p>
+                <p>
+                  <span>Civico: </span
+                  >{{ client.indirizzoSedeOperativa.civico }}
+                </p>
+                <p>
+                  <span>Località: </span
+                  >{{ client.indirizzoSedeOperativa.localita }}
+                </p>
+                <p>
+                  <span>Comune: </span
+                  >{{ client.indirizzoSedeOperativa.comune.nome }}
+                </p>
+                <p>
+                  <span>Provincia: </span
+                  >{{ client.indirizzoSedeOperativa.comune.provincia.nome }}
+                </p>
+              </div>
             </div>
             <div>
-              <button mat-flat-button routerLink="/billings/client-billings/{{client.id}}" class="fatture button-card d-block">Fatture</button>
-              <button mat-flat-button routerLink="{{client.id}}" class="d-block button-card" color="primary">Modifica</button>
-              <button mat-flat-button class="d-block button-card" color="warn" (click)="deleteClient(client.id)">Elimina</button>
+              <button
+                mat-flat-button
+                routerLink="/billings/client-billings/{{ client.id }}"
+                class="fatture button-card d-block"
+              >
+                Fatture
+              </button>
+              <button
+                mat-flat-button
+                routerLink="{{ client.id }}"
+                class="d-block button-card"
+                color="primary"
+              >
+                Modifica
+              </button>
+              <button
+                mat-flat-button
+                class="d-block button-card"
+                color="warn"
+                (click)="deleteClient(client.id)"
+              >
+                Elimina
+              </button>
             </div>
           </mat-card-content>
         </mat-card>
@@ -129,7 +222,14 @@
   <div class="cont">
     <h1>Messaggio di sistema</h1>
     <p>Cliente cancellato correttamente</p>
-    <button mat-flat-button color="warn" class="closeBtn" (click)="closeDialog()">Chiudi</button>
+    <button
+      mat-flat-button
+      color="warn"
+      class="closeBtn"
+      (click)="closeDialog()"
+    >
+      Chiudi
+    </button>
   </div>
 </div>
 

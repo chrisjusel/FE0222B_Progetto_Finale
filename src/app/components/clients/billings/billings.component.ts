@@ -32,7 +32,9 @@ export class BillingsComponent implements OnInit {
       this.clientId = +params['idClient'];
       if(this.clientId != 0){
         this.getAllBillings(this.clientId, this.pageIndex, this.pageSize);
+        console.log(this.billings)
       }
+
     })
 
     this.sub = this.router.url.subscribe((res) => {

@@ -44,4 +44,8 @@ export class ClientsService {
   getByDataInserimentoBetween(dataFrom: string, dataTo: string, pageIndex: number, pageSize: number){
     return this.http.get<any>(`${this.pathApi}/api/clienti/datainserimento?from=${dataFrom}&to=${dataTo}&page=${pageIndex}&size=${pageSize}`);
   }
+
+  getByFatturatoBetween(fatturatoFrom: number, fatturatoTo: number, pageIndex: number, pageSize: number){
+    return this.http.get<any>(`${this.pathApi}/api/clienti/fatturatoannuale?from=${fatturatoFrom}&to=${fatturatoTo}&page=${pageIndex}&size=${pageSize}`);
+  }
 }
