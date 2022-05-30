@@ -1,4 +1,4 @@
-<div *ngIf="billings" class="clients row">
+<div *ngIf="billings && billings[0].cliente; else nobillings" class="clients row">
   <div class="d-flex pageTitle">
     <h1>Fatture per {{ billings[0].cliente.ragioneSociale }}</h1>
   </div>
@@ -54,3 +54,9 @@
 </div>
 
 <router-outlet></router-outlet>
+
+<ng-template  #nobillings>
+  <div class="d-flex justify-content-center mt-5">
+    <h1>Questo cliente non ha fatture</h1>
+  </div>
+</ng-template>

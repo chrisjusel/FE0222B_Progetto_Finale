@@ -3,10 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Cliente } from 'src/app/models/cliente';
 import { Fattura } from 'src/app/models/fattura';
 import { BillingsService } from 'src/app/services/billings.service';
-import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
   selector: 'app-global-billings',
