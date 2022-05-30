@@ -67,6 +67,7 @@ export class NewBillingComponent implements OnInit {
     console.log(send);
     this.billingsSrv.createBilling(send).subscribe((res) => {
       console.log(res);
+      this.router.navigate([`billings/client-billings/${this.clientId}`])
     })
   }
 }

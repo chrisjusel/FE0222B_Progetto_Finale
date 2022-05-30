@@ -2,8 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Cliente } from 'src/app/models/cliente';
 import { Fattura } from 'src/app/models/fattura';
 import { BillingsService } from 'src/app/services/billings.service';
+import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
   selector: 'app-billings',
@@ -16,6 +18,7 @@ export class BillingsComponent implements OnInit {
 
   billings!: Fattura[];
   clientId!: number;
+  client!: Cliente;
 
   sub!: Subscription;
 
@@ -25,14 +28,14 @@ export class BillingsComponent implements OnInit {
   pageSize: number = 10;
   totalElements!: number;
 
-  constructor(private router: ActivatedRoute, private billingSrv: BillingsService) { }
+  constructor(private router: ActivatedRoute, private billingSrv: BillingsService, private clientSrv: ClientsService) { }
 
   ngOnInit(): void {
     this.sub = this.router.params.subscribe((params) => {
       this.clientId = +params['idClient'];
       if(this.clientId != 0){
         this.getAllBillings(this.clientId, this.pageIndex, this.pageSize);
-        console.log(this.billings)
+        this.getClientbyId(this.clientId)
       }
 
     })
@@ -70,6 +73,12 @@ export class BillingsComponent implements OnInit {
 
   onDestroy(){
     this.sub.unsubscribe();
+  }
+
+  getClientbyId(clientId: number){
+    this.clientSrv.getClientById(clientId).subscribe((res) => {
+      this.client = res;
+    })
   }
 
 }

@@ -1,12 +1,12 @@
-<div *ngIf="billings && billings[0].cliente; else nobillings" class="clients row">
+<div class="clients row">
   <div class="d-flex pageTitle">
-    <h1>Fatture per {{ billings[0].cliente.ragioneSociale }}</h1>
+    <h1>Fatture per {{ client.ragioneSociale }}</h1>
   </div>
   <div class="head d-flex">
     <button
       mat-fab
       color="primary"
-      routerLink="/billings/client-billings/0/{{ billings[0].cliente.id }}"
+      routerLink="/billings/client-billings/0/{{ clientId }}"
       aria-label="Aggiungi utente"
     >
       <mat-icon>add</mat-icon>
@@ -22,40 +22,47 @@
     >
     </mat-paginator>
   </div>
-  <div *ngFor="let billing of billings; let i = index">
-    <mat-card>
-      <mat-card-header>
-        <div class="d-flex justify-content-between">
-          ID:{{ billing.id }} - Email: {{ billing.cliente.email }}
-        </div>
-      </mat-card-header>
-      <mat-card-content class="card-content d-flex justify-content-between">
-        <div>
-          <p><span>Importo:</span> {{ billing.importo }}</p>
-          <p><span>Anno:</span> {{ billing.anno }}</p>
-          <p><span>Stato: </span>{{ billing.stato.nome }}</p>
-        </div>
-        <div>
-          <button
-            mat-flat-button
-            class="d-block button-card"
-            color="primary"
-            routerLink="modify-client-billing/{{ billing.id }}"
-          >
-            Modifica
-          </button>
-          <button mat-flat-button class="d-block button-card" color="warn" (click)="deleteBilling(billing.id)">
-            Elimina
-          </button>
-        </div>
-      </mat-card-content>
-    </mat-card>
+  <div *ngIf="billings && billings[0]; else nobillings">
+    <div *ngFor="let billing of billings; let i = index">
+      <mat-card>
+        <mat-card-header>
+          <div class="d-flex justify-content-between">
+            ID:{{ billing.id }} - Email: {{ billing.cliente.email }}
+          </div>
+        </mat-card-header>
+        <mat-card-content class="card-content d-flex justify-content-between">
+          <div>
+            <p><span>Importo:</span> {{ billing.importo }}</p>
+            <p><span>Anno:</span> {{ billing.anno }}</p>
+            <p><span>Stato: </span>{{ billing.stato.nome }}</p>
+          </div>
+          <div>
+            <button
+              mat-flat-button
+              class="d-block button-card"
+              color="primary"
+              routerLink="modify-client-billing/{{ billing.id }}"
+            >
+              Modifica
+            </button>
+            <button
+              mat-flat-button
+              class="d-block button-card"
+              color="warn"
+              (click)="deleteBilling(billing.id)"
+            >
+              Elimina
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>
 
 <router-outlet></router-outlet>
 
-<ng-template  #nobillings>
+<ng-template #nobillings>
   <div class="d-flex justify-content-center mt-5">
     <h1>Questo cliente non ha fatture</h1>
   </div>
